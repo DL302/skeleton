@@ -11,7 +11,7 @@ A Discord bot.
 ## Steps:
 1. Run `git clone https://github.com/DL302/skeleton.git`
 2. Run `cd skeleton` and then run `npm install`
-3. Rename `example_config.json` to `config.json` and put your bot token in
+3. Rename `example_config.json` to `config.json` and put your bot token and user ID in
 
 ## To start up the bot:
 Run `node index.js`

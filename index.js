@@ -9,6 +9,10 @@ client.on('ready', () => {
     command(client, 'ping', (message) => {
         message.channel.send('Pong.');
     });
+
+    command(client, ['shrugflip', 'sf'], (message) => {
+        message.channel.send('┻━┻︵ ¯\\_(ツ)_/¯ ︵ ┻━┻');
+    });
 });
 
 client.login(config.token);

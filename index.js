@@ -15,7 +15,7 @@ client.on('ready', () => {
         if (member.id === config.ownerID && content.search(/config/gi) === -1) {
             const result = eval(content.replace(`${config.prefix}eval `, ''));
             channel.send(result);
-            //console.log(result);
+            console.log(result);
         }
     });
 

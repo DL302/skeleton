@@ -1,0 +1,2 @@
+# skeleton
+A Discord bot.

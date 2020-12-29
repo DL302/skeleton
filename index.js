@@ -6,13 +6,22 @@ const command = require('./command');
 client.on('ready', () => {
     console.log('start.');
 
-    command(client, 'ping', (message) => {
+    command(client, 'ping', message => {
         message.channel.send('Pong.');
+    });
+
+    command(client, 'eval', message => {
+        const { member, content } = message;
+        if (member.id === config.ownerID && content.search(/config/gi) === -1) {
+            const result = eval(content.replace(`${config.prefix}eval `, ''));
+            //channel.send(result);
+            console.log(result);
+        }
     });
 
     /*
     //regular shrugflip command
-    command(client, ['shrugflip', 'sf'], (message) => {
+    command(client, ['shrugflip', 'sf'], message => {
         message.channel.send('┻━┻︵ ¯\\_(ツ)_/¯ ︵ ┻━┻');
     });
     */

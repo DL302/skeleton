@@ -11,7 +11,7 @@ client.on('ready', () => {
     });
 
     command(client, 'eval', message => {
-        const { member, content } = message;
+        const { member, channel, content } = message;
         if (member.id === config.ownerID && content.search(/config/gi) === -1) {
             const result = eval(content.replace(`${config.prefix}eval `, ''));
             channel.send(result);

@@ -35,7 +35,20 @@ client.on('ready', () => {
             // possible options here e.g. options: [{...}]
         }
     });
-
+    client.api.applications(client.user.id).commands.post({
+        data: {
+            name: 'sendoutofwheelchair',
+            description: 'a text image depicting someone being hit out of a wheelchair by a man golfing',
+            options: [
+                {
+                    name: 'content',
+                    description: 'name of person to be sent out of wheelchair',
+                    type: 3,
+                    required: true
+                }
+            ]
+        }
+    });
 
     client.ws.on('INTERACTION_CREATE', async interaction => {
         const command = interaction.data.name.toLowerCase();
@@ -47,6 +60,30 @@ client.on('ready', () => {
                     type: 4,
                     data: {
                         content: '┻━┻︵ ¯\\_(ツ)_/¯ ︵ ┻━┻'
+                    }
+                }
+            });
+        }
+        if (command === 'sendoutofwheelchair') {
+            const name = args.find(arg => arg.name.toLowerCase() === 'content').value;
+            let numbertext = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+            let emoji_name = '';
+            for (char of name) {
+                if (!isNaN(char)) {
+                    emoji_name += `:${numbertext[+char]}: `
+                }
+                else if ((/[a-z]/).test(char)) {
+                    emoji_name += `:regional_indicator_${char}: `;
+                }
+                else {
+                    continue;
+                }
+            }
+            client.api.interactions(interaction.id, interaction.token).callback.post({
+                data: {
+                    type: 4,
+                    data: {
+                        content: `:man_cartwheeling: :arrow_left: ${emoji_name}\n\n\n\n                        :manual_wheelchair: :person_golfing:`
                     }
                 }
             });

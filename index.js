@@ -44,7 +44,7 @@ client.on('ready', () => {
                     name: 'content',
                     description: 'name of person to be sent out of wheelchair',
                     type: 3,
-                    required: true
+                    required: false
                 }
             ]
         }
@@ -65,11 +65,26 @@ client.on('ready', () => {
             });
         }
         if (command === 'sendoutofwheelchair') {
-            const name = args.find(arg => arg.name.toLowerCase() === 'content').value;
+            const name = args.find(arg => arg.name.toLowerCase() === 'content').value.toLowerCase();
             let numbertext = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
-            let emoji_name = '';
+            let emoji_name = ':arrow_left: ';
+            if (name === '') {
+                emoji_name = '';
+            }
             for (char of name) {
-                if (!isNaN(char)) {
+                if (char === ' ') {
+                    emoji_name += '     ';
+                }
+                else if (char === '.') {
+                    emoji_name += ':record_button:';
+                }
+                else if (char === '!') {
+                    emoji_name += ':exclamation:';
+                }
+                else if (char === '?') {
+                    emoji_name += ':question:';
+                }
+                else if (!isNaN(char)) {
                     emoji_name += `:${numbertext[+char]}: `
                 }
                 else if ((/[a-z]/).test(char)) {
@@ -83,7 +98,7 @@ client.on('ready', () => {
                 data: {
                     type: 4,
                     data: {
-                        content: `:man_cartwheeling: :arrow_left: ${emoji_name}\n\n\n\n                        :manual_wheelchair: :person_golfing:`
+                        content: `:man_cartwheeling: ${emoji_name}\n\n\n\n                        :manual_wheelchair: :person_golfing:`
                     }
                 }
             });

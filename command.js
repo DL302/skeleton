@@ -1,4 +1,4 @@
-const { prefix } = require('./config.json');
+const { prefix, blacklist } = require('./config.json');
 module.exports = (client, aliases, callback) => {
     if (typeof aliases === 'string') {
         aliases = [aliases];
@@ -9,6 +9,10 @@ module.exports = (client, aliases, callback) => {
             const command = `${prefix}${alias}`;
 
             if (content.startsWith(`${command} `) || content === command) {
+                // prevent blacklisted members from using commands
+                if (blacklist.includes(message.author.id)) {
+                    return;
+                }
                 console.log(`Running ${command}`);
                 callback(message);
             }

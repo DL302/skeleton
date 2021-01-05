@@ -1,5 +1,6 @@
 {
-    "token": "putyourtokenhere",
+    "token": "putyourtokeninthesequotes",
     "prefix": "!",
-    "ownerID": "putyouruserIDhere"
+    "ownerID": "putyouruserIDinthesequotes",
+    "blacklist": ["userIDtoblacklist0", "userIDtoblacklist1", "etc.", "these people won't be able to use bot commands or join VC by default"]
 }

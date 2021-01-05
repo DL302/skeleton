@@ -18,9 +18,16 @@ client.on('ready', () => {
             console.log(result);
         }
     });
-
+    // prevent blacklisted members from joining vc
+    client.on('voiceStateUpdate', newState => {
+        config.blacklist.forEach(id => {
+            if (newState.id === id) {
+                newState.kick();
+            }
+        });
+    });
     /*
-    //regular shrugflip command
+    // regular shrugflip command
     command(client, ['shrugflip', 'sf'], message => {
         message.channel.send('┻━┻︵ ¯\\_(ツ)_/¯ ︵ ┻━┻');
     });

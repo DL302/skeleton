@@ -18,13 +18,15 @@ client.on('ready', () => {
             console.log(result);
         }
     });
-    // prevent blacklisted members from joining vc
+    // prevent blacklisted members from joining vc, this is set in the config file
     client.on('voiceStateUpdate', newState => {
-        config.blacklist.forEach(id => {
-            if (newState.id === id) {
-                newState.kick();
-            }
-        });
+        if (config.preventBlacklistVC) {
+            config.blacklist.forEach(id => {
+                if (newState.id === id) {
+                    newState.kick();
+                }
+            });
+        }
     });
     /*
     // regular shrugflip command

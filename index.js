@@ -10,6 +10,10 @@ client.on('ready', () => {
         message.channel.send('Pong.');
     });
 
+    command(client, 'a2a', message => {
+        message.channel.send('https://raw.githubusercontent.com/DL302/skeleton/master/assets/a2a.png');
+    });
+
     command(client, 'eval', message => {
         const { member, channel, content } = message;
         if (member.id === config.ownerID && content.search(/config/gi) === -1) {
